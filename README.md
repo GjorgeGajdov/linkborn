@@ -6,6 +6,10 @@
 
 <p align="center"><em>Your notes, born in a link.</em></p>
 
+<p align="center">
+  <a href="https://linkborn.vercel.app"><strong>→ Try it live at linkborn.vercel.app</strong></a>
+</p>
+
 Linkborn is a fully client-side note-taking app where your notes live entirely in the URL. No accounts, no servers, no databases — just a link you can bookmark and share.
 
 ## How it works
