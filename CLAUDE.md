@@ -10,11 +10,23 @@ npm run build      # Type-check then bundle for production (output: dist/)
 npm run preview    # Serve the production build locally
 ```
 
-There are no test or lint scripts — TypeScript strict mode (`noUnusedLocals`, `noUnusedParameters`) is the primary code quality gate, enforced during `build`.
+There are no test, lint, or format scripts. TypeScript strict mode (`noUnusedLocals`, `noUnusedParameters`) is the primary code quality gate, enforced during `build`. Do not attempt to run `eslint`, `prettier`, or `biome` — they are not installed.
 
 ## Architecture
 
 Linkborn is a fully client-side note-taking app. All state lives in the URL hash, compressed with LZ-String. No backend, no auth, no database.
+
+### Folder structure
+
+```
+src/
+├── components/     # React components (one per file)
+├── hooks/          # Custom React hooks
+├── utils/          # Pure functions (no React)
+├── styles/
+│   └── index.css   # All styles, single file
+└── types.ts        # Shared TypeScript types
+```
 
 ### State flow
 
@@ -40,6 +52,18 @@ Note     = { title: string; content: string }
 | `src/utils/urlState.ts` | `readStateFromHash` / `writeStateToHash` |
 | `src/utils/compression.ts` | LZ-String compress/decompress wrappers |
 | `src/styles/index.css` | All styles — uses CSS custom properties for theming |
+
+### Navigating to the landing page
+
+Calling `setState(null)` from anywhere returns the user to `LandingPage`. This is used by the home button in the header and by `useNotes` when the last note is deleted.
+
+### Styling conventions
+
+All styles live in `src/styles/index.css` — no CSS modules or styled-components. Class names follow a BEM-ish pattern (`block`, `block-element`, `block--modifier`). Add new component styles at the bottom of the relevant section, grouped by component.
+
+### URL size constraint
+
+State is compressed but still URL-bound. Very large note content can exceed browser URL limits (~2000 chars in some environments before compression, more in practice). Avoid features that would dramatically increase state size without also improving compression.
 
 ### Dark mode
 
