@@ -14,7 +14,7 @@ interface Props {
 export function AppLayout({ state, setState }: Props) {
   const { addNote, deleteNote, updateNote, selectNote } = useNotes(state, setState);
   const { dark, toggle: toggleTheme } = useTheme();
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(() => window.innerWidth >= 640);
 
   return (
     <div className="app-layout">
