@@ -69,6 +69,14 @@ State is compressed but still URL-bound. Very large note content can exceed brow
 
 Implemented via `[data-theme="dark"]` attribute on `document.documentElement`. All colors are CSS custom properties defined in `:root` and overridden in `[data-theme="dark"]`. Never use hardcoded color values — always add a token.
 
+### Keeping docs in sync
+
+After any significant change (new feature, new component, new pattern, behavior change), update:
+- **CLAUDE.md** — add or revise the relevant section so future Claude instances have accurate context
+- **README.md** — update the Features list, Important note, or How it works section if user-facing behavior changed
+
+Skip doc updates for small fixes, style tweaks, or refactors that don't change behavior.
+
 ### Mobile sidebar
 
 On screens `< 640px`, the sidebar is `position: absolute` and overlays the editor. A `sidebar-backdrop` div (semi-transparent dark overlay) is rendered when the sidebar is open; clicking it closes the sidebar. The backdrop starts at `--header-height` to leave the header unaffected.
