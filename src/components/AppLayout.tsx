@@ -47,9 +47,7 @@ export function AppLayout({ state, setState }: Props) {
       </header>
 
       <div className={`app-body${sidebarOpen ? '' : ' sidebar-collapsed'}`}>
-        {sidebarOpen && (
-          <div className="sidebar-backdrop" onClick={() => setSidebarOpen(false)} />
-        )}
+        <div className="sidebar-backdrop" onClick={() => setSidebarOpen(false)} />
         <NoteList
           state={state}
           onAdd={() => { addNote(); closeSidebarOnMobile(); }}
