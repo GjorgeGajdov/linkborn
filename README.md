@@ -88,7 +88,8 @@ src/
 ## Features
 
 - Create, edit, and delete notes
-- All notes stored in a single shareable URL
+- Share a single note or your entire note directory via a dropdown
+- Native share sheet on mobile, clipboard copy on desktop
 - Dark mode (persisted in `localStorage`)
 - Delete confirmation modal
 - Session recovery from `localStorage` backup
@@ -96,7 +97,7 @@ src/
 
 ## Important
 
-**Your notes only exist as long as you have the URL.** Bookmark it, email it to yourself, or use the **Share** button to copy it after every session.
+**Your notes only exist as long as you have the URL.** Bookmark it, email it to yourself, or use the **Share** button after every session — choose to share just the current note or all notes.
 
 ## A note on the code
 

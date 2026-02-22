@@ -1,6 +1,7 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { NoteList } from './NoteList';
 import { NoteEditor } from './NoteEditor';
+import { ShareButton } from './ShareButton';
 import { useNotes } from '../hooks/useNotes';
 import { useTheme } from '../hooks/useTheme';
 import type { AppState } from '../types';
@@ -14,8 +15,6 @@ export function AppLayout({ state, setState }: Props) {
   const { addNote, deleteNote, updateNote, selectNote } = useNotes(state, setState);
   const { dark, toggle: toggleTheme } = useTheme();
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [copied, setCopied] = useState(false);
-  const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   return (
     <div className="app-layout">
@@ -40,21 +39,8 @@ export function AppLayout({ state, setState }: Props) {
         >
           {dark ? '☀' : '☾'}
         </button>
-        <button
-          className="btn btn-primary"
-          onClick={() => {
-            navigator.clipboard.writeText(window.location.href).then(() => {
-              if (copyTimer.current) clearTimeout(copyTimer.current);
-              setCopied(true);
-              copyTimer.current = setTimeout(() => setCopied(false), 2000);
-            }).catch(() => {});
-          }}
-          title="Copy link to share"
-        >
-          Copy Link
-        </button>
+        <ShareButton state={state} />
       </header>
-      {copied && <div className="toast">Link copied!</div>}
 
       <div className={`app-body${sidebarOpen ? '' : ' sidebar-collapsed'}`}>
         {sidebarOpen && (
