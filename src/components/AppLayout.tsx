@@ -16,6 +16,10 @@ export function AppLayout({ state, setState }: Props) {
   const { dark, toggle: toggleTheme } = useTheme();
   const [sidebarOpen, setSidebarOpen] = useState(() => window.innerWidth >= 640);
 
+  function closeSidebarOnMobile() {
+    if (window.innerWidth < 640) setSidebarOpen(false);
+  }
+
   return (
     <div className="app-layout">
       <header className="app-header">
@@ -48,13 +52,9 @@ export function AppLayout({ state, setState }: Props) {
         )}
         <NoteList
           state={state}
-          onAdd={addNote}
+          onAdd={() => { addNote(); closeSidebarOnMobile(); }}
           onDelete={deleteNote}
-          onSelect={(id) => {
-            selectNote(id);
-            // On mobile, close sidebar after selecting
-            if (window.innerWidth < 640) setSidebarOpen(false);
-          }}
+          onSelect={(id) => { selectNote(id); closeSidebarOnMobile(); }}
         />
         <NoteEditor state={state} onUpdate={updateNote} />
       </div>

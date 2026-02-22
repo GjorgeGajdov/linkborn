@@ -517,7 +517,10 @@ html, body, #root {
   }
 
   .editor-title { font-size: 18px; }
+  .editor-content { font-size: 16px; } /* prevent iOS auto-zoom on focus */
   .editor-content, .editor-header { padding-left: 16px; padding-right: 16px; }
+
+  .note-item-delete { opacity: 1; }
 }
 
 /* ── Modal ───────────────────────────────────────────────────── */

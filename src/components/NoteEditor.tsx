@@ -10,9 +10,9 @@ export function NoteEditor({ state, onUpdate }: Props) {
   const note = state.notes[state.current];
   const titleRef = useRef<HTMLInputElement>(null);
 
-  // Focus title when switching to a new note
+  // Focus title when switching to a new note (desktop only — avoids keyboard pop-up on mobile)
   useEffect(() => {
-    titleRef.current?.focus();
+    if (window.innerWidth >= 640) titleRef.current?.focus();
   }, [state.current]);
 
   if (!note) {
