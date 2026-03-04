@@ -693,7 +693,8 @@ html, body, #root {
   font-weight: 600;
   font-family: var(--font-sans);
   color: var(--color-text-muted);
-  padding: 7px 8px;
+  padding: 0 8px;
+  height: 36px;
   line-height: 1;
   transition: color 0.12s;
 }

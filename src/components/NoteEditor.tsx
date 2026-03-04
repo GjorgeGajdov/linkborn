@@ -91,6 +91,7 @@ export function NoteEditor({ state, onUpdate, prefs, onPrefsChange }: Props) {
         placeholder="Start writing..."
         value={note.content}
         onChange={(e) => onUpdate(state.current, { content: e.target.value })}
+        onFocus={() => { if (window.innerWidth < 640) setPrefsOpen(false); }}
         spellCheck={prefs.spellCheck}
         style={{
           fontSize: `${prefs.fontSize}px`,
