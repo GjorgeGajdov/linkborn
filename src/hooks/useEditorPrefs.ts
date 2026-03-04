@@ -10,7 +10,7 @@ export interface EditorPrefs {
 }
 
 export const EDITOR_DEFAULTS: EditorPrefs = {
-  fontSize: 15,
+  fontSize: 16,
   fontFamily: 'sans',
   lineHeight: 'normal',
   spellCheck: true,

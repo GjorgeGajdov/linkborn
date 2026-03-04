@@ -5,7 +5,7 @@ interface Props {
   onChange: (patch: Partial<EditorPrefs>) => void;
 }
 
-const FONT_SIZES = [13, 15, 17, 19];
+const FONT_SIZES = [14, 16, 18, 20];
 
 const FONTS: { value: EditorPrefs['fontFamily']; label: string }[] = [
   { value: 'sans', label: 'Sans' },
