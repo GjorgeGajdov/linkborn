@@ -4,6 +4,7 @@ import { NoteEditor } from './NoteEditor';
 import { ShareButton } from './ShareButton';
 import { useNotes } from '../hooks/useNotes';
 import { useTheme } from '../hooks/useTheme';
+import { useEditorPrefs } from '../hooks/useEditorPrefs';
 import type { AppState } from '../types';
 
 interface Props {
@@ -14,6 +15,7 @@ interface Props {
 export function AppLayout({ state, setState }: Props) {
   const { addNote, deleteNote, updateNote, selectNote } = useNotes(state, setState);
   const { dark, toggle: toggleTheme } = useTheme();
+  const { prefs, setPrefs } = useEditorPrefs();
   const [sidebarOpen, setSidebarOpen] = useState(() => window.innerWidth >= 640);
 
   function closeSidebarOnMobile() {
@@ -54,7 +56,7 @@ export function AppLayout({ state, setState }: Props) {
           onDelete={deleteNote}
           onSelect={(id) => { selectNote(id); closeSidebarOnMobile(); }}
         />
-        <NoteEditor state={state} onUpdate={updateNote} />
+        <NoteEditor state={state} onUpdate={updateNote} prefs={prefs} onPrefsChange={setPrefs} />
       </div>
     </div>
   );

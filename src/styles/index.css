@@ -435,6 +435,9 @@ html, body, #root {
 .editor-header {
   padding: 20px 24px 0;
   border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 .editor-title {
@@ -608,11 +611,18 @@ html, body, #root {
 .share-menu .btn { padding-right: 10px; }
 .share-chevron { font-size: 14px; line-height: 1; vertical-align: middle; }
 
+.share-chevron {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.share-chevron--open { transform: rotate(180deg); }
+
 .share-backdrop {
   position: fixed;
   inset: 0;
   z-index: 40;
+  display: none;
 }
+.share-backdrop--open { display: block; }
 
 .share-dropdown {
   position: absolute;
@@ -625,6 +635,15 @@ html, body, #root {
   z-index: 50;
   min-width: 148px;
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition: opacity 0.15s, transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.share-dropdown--open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .share-dropdown-item {
@@ -641,6 +660,112 @@ html, body, #root {
 .share-dropdown-item:hover { background: var(--color-bg); }
 .share-dropdown-item + .share-dropdown-item {
   border-top: 1px solid var(--color-border);
+}
+
+/* ── Editor preferences ──────────────────────────────────────── */
+.editor-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.prefs-accordion {
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.prefs-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+}
+
+.prefs-toggle,
+.prefs-spellcheck-btn {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  color: var(--color-text-muted);
+  padding: 7px 8px;
+  line-height: 1;
+  transition: color 0.12s;
+}
+.prefs-toggle:hover,
+.prefs-spellcheck-btn:hover { color: var(--color-primary); }
+.prefs-toggle--active,
+.prefs-spellcheck-btn--active { color: var(--color-primary); }
+.prefs-chevron {
+  vertical-align: middle;
+  margin-left: 1px;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.prefs-chevron--open { transform: rotate(180deg); }
+
+.prefs-panel-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+.prefs-panel-wrapper--open { grid-template-rows: 1fr; }
+
+.prefs-panel {
+  background: var(--color-bg);
+  min-height: 0;
+}
+
+.prefs-panel-content {
+  padding: 12px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+}
+
+.prefs-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.prefs-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--color-text-muted);
+  width: 52px;
+  flex-shrink: 0;
+}
+
+.prefs-options {
+  display: flex;
+  gap: 4px;
+}
+
+.prefs-btn {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 3px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  transition: background 0.1s, color 0.1s, border-color 0.1s;
+}
+.prefs-btn:hover { color: var(--color-text); border-color: var(--color-text-muted); }
+.prefs-btn--active {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+  font-weight: 600;
 }
 
 /* ── Toast ───────────────────────────────────────────────────── */

@@ -39,32 +39,28 @@ export function ShareButton({ state }: Props) {
           title="Share"
         >
           {canShare ? 'Share' : 'Copy Link'}
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style={{ verticalAlign: 'middle', marginLeft: '2px' }} aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className={`share-chevron${menuOpen ? ' share-chevron--open' : ''}`} style={{ verticalAlign: 'middle', marginLeft: '2px' }} aria-hidden="true">
             <path d="M7 10L12 15L17 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
-        {menuOpen && (
-          <>
-            <div className="share-backdrop" onClick={() => setMenuOpen(false)} />
-            <div className="share-dropdown">
-              <button
-                className="share-dropdown-item"
-                onClick={() => {
-                  const note = state.notes[state.current];
-                  handleShare(buildNoteUrl({ notes: { [state.current]: note }, current: state.current }));
-                }}
-              >
-                {canShare ? 'Share' : 'Copy'} note
-              </button>
-              <button
-                className="share-dropdown-item"
-                onClick={() => handleShare(window.location.href)}
-              >
-                {canShare ? 'Share' : 'Copy'} all notes
-              </button>
-            </div>
-          </>
-        )}
+        <div className={`share-backdrop${menuOpen ? ' share-backdrop--open' : ''}`} onClick={() => setMenuOpen(false)} />
+        <div className={`share-dropdown${menuOpen ? ' share-dropdown--open' : ''}`}>
+          <button
+            className="share-dropdown-item"
+            onClick={() => {
+              const note = state.notes[state.current];
+              handleShare(buildNoteUrl({ notes: { [state.current]: note }, current: state.current }));
+            }}
+          >
+            {canShare ? 'Share' : 'Copy'} note
+          </button>
+          <button
+            className="share-dropdown-item"
+            onClick={() => handleShare(window.location.href)}
+          >
+            {canShare ? 'Share' : 'Copy'} all notes
+          </button>
+        </div>
       </div>
       {copied && <div className="toast">Link copied!</div>}
     </>
